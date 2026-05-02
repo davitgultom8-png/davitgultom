@@ -3,150 +3,239 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memory Of Love ❤️</title>
-  
-  <!-- Logo Love Merah pada Tab Browser (Favicon) -->
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2107/2107845.png" type="image/png">
-
+  <!-- Judul diubah menjadi Memory of Love sesuai permintaan -->
+  <title>Memory of Love</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
+    /* Reset dasar */
+    * {
       margin: 0;
-      padding: 20px;
-      background: linear-gradient(135deg, #ffb6c1, #ff69b4, #ffc0cb);
-      background-attachment: fixed;
-      background-size: cover;
-      color: #fff;
-      overflow-x: hidden;
-      min-height: 100vh;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    /* Background Anime Overlay */
-    .bg-overlay {
+    body, html {
+      height: 100%;
+      width: 100%;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    /* Efek Hujan Love */
+    .heart {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: url("images/anime-love-bg.jpg") no-repeat center center;
-      background-size: cover;
-      opacity: 0.3;
-      z-index: -1;
+      top: -10px;
+      color: #ff0000; /* Warna Love Merah */
+      font-size: 20px;
+      user-select: none;
+      z-index: 1001;
+      pointer-events: none;
+      animation: fall linear forwards;
     }
 
-    h1, h2 {
-      text-shadow: 2px 2px 8px rgba(199, 21, 133, 0.7);
+    @keyframes fall {
+      to {
+        transform: translateY(105vh) rotate(360deg);
+      }
+    }
+
+    /* Layar Awal (Splash Screen) */
+    #welcome-screen {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: #ffb6c1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      color: white;
+      text-align: center;
+    }
+
+    #welcome-screen button {
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 50px;
+      background: white;
+      color: #ff69b4;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+
+    /* Container utama untuk background */
+    .main-container {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("anime-love-bg.jpg"); 
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(255, 255, 255, 0.4);
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      width: 100%;
+    }
+
+    h1 {
+      color: #d63384;
+      text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8);
+      margin-bottom: 20px;
+      opacity: 0;
     }
 
     .gallery {
       position: relative;
+      height: 450px;
       width: 100%;
-      height: 70vh;
-      margin-top: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
     img {
       position: absolute;
-      max-width: 85%;
-      max-height: 450px;
-      border: 8px solid #fff;
-      border-radius: 20px;
-      opacity: 0;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      max-width: 90%;
+      max-height: 400px;
+      border: 10px solid white;
+      border-radius: 15px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      object-fit: cover;
-      transition: transform 0.5s;
-    }
-
-    /* Animasi Muncul Bergantian */
-    @keyframes showHide {
-      0% { opacity: 0; transform: scale(0.8) rotate(-2deg); }
-      10% { opacity: 1; transform: scale(1) rotate(0deg); }
-      90% { opacity: 1; transform: scale(1) rotate(0deg); }
-      100% { opacity: 0; transform: scale(1.1) rotate(2deg); }
-    }
-
-    .animate-photo {
-      animation: showHide 8s infinite;
-    }
-
-    /* Pesan Teks */
-    #pesan-akhir {
       opacity: 0;
-      margin-top: 20px;
-      font-size: 1.5rem;
-      padding: 0 20px;
     }
 
-    .music-control {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.5);
-      padding: 10px 15px;
-      border-radius: 30px;
-      font-size: 14px;
-      color: #c71585;
-      font-weight: bold;
-      cursor: pointer;
-      backdrop-filter: blur(5px);
+    /* Animasi Aktif Setelah Klik */
+    .animate-now h1 {
+      animation: fadeText 3s forwards;
     }
+
+    .animate-now img {
+      animation: showHide 8s forwards;
+    }
+
+    @keyframes fadeText {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes showHide {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+      15% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      85% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+    }
+
+    /* Delay Foto */
+    img:nth-child(1) { animation-delay: 2s; }
+    img:nth-child(2) { animation-delay: 10s; }
+    img:nth-child(3) { animation-delay: 18s; }
+    img:nth-child(4) { animation-delay: 26s; }
+    img:nth-child(5) { animation-delay: 34s; }
+    img:nth-child(6) { animation-delay: 42s; }
+    img:nth-child(7) { animation-delay: 50s; }
+    img:nth-child(8) { animation-delay: 58s; }
+    img:nth-child(9) { animation-delay: 66s; }
+    img:nth-child(10) { animation-delay: 74s; }
+    img:nth-child(11) { animation-delay: 82s; }
+    img:nth-child(12) { animation-delay: 90s; }
+    img:nth-child(13) { animation-delay: 98s; }
+    img:nth-child(14) { animation-delay: 106s; }
+    img:nth-child(15) { animation-delay: 114s; }
+    img:nth-child(16) { animation-delay: 122s; }
+    img:nth-child(17) { animation-delay: 130s; }
   </style>
 </head>
 <body>
 
-  <div class="bg-overlay"></div>
-
-  <h1 id="title">💖 Selamat wisuda sayang 💖</h1>
-
-  <div class="gallery" id="photo-container">
-    <!-- Foto akan dimuat otomatis oleh JavaScript agar lebih rapi -->
+  <!-- Layar Sambutan -->
+  <div id="welcome-screen">
+    <h1>Hai Sayang ❤️</h1>
+    <p>Ada pesan spesial buat kamu...</p>
+    <button onclick="bukaPesan()">Buka Memory of Love</button>
   </div>
 
-  <h2 id="pesan-akhir">💖 Jangan berhenti mencintaiku dan jangan berubah sampai kapanpun 💖</h2>
+  <!-- Konten Utama -->
+  <div class="main-container" id="main-container">
+    <div class="overlay"></div>
+    <div class="content" id="content-box">
+      <h1>💖 Memory of Love 💖</h1>
+      <div class="gallery">
+        <img src="foto1.jpeg" alt="1">
+        <img src="foto2.jpeg" alt="2">
+        <img src="foto3.jpeg" alt="3">
+        <img src="foto4.jpeg" alt="4">
+        <img src="foto5.jpeg" alt="5">
+        <img src="foto6.jpeg" alt="6">
+        <img src="foto7.jpeg" alt="7">
+        <img src="foto8.jpeg" alt="8">
+        <img src="foto9.jpeg" alt="9">
+        <img src="foto10.jpeg" alt="10">
+        <img src="foto11.jpeg" alt="11">
+        <img src="foto12.jpeg" alt="12">
+        <img src="foto13.jpeg" alt="13">
+        <img src="foto14.jpeg" alt="14">
+        <img src="foto15.jpeg" alt="15">
+        <img src="foto16.jpeg" alt="16">
+        <img src="foto17.jpeg" alt="17">
+      </div>
+    </div>
+  </div>
 
-  <audio id="mySong" loop>
-    <source src="musik/musik/TitiDj-JanganBerhentiMencintaiku.mp3" type="audio/mpeg">
+  <audio id="lagu" loop>
+    <source src="TitiDj-JanganBerhentiMencintaiku.mp3" type="audio/mpeg">
   </audio>
 
-  <div class="music-control" onclick="playMusic()">🎵 Klik untuk Musik</div>
-
   <script>
-    const totalPhotos = 17;
-    const container = document.getElementById('photo-container');
+    // Fungsi membuat love jatuh
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+      heart.style.opacity = Math.random();
+      document.body.appendChild(heart);
 
-    // Generate elemen foto secara otomatis
-    for (let i = 1; i <= totalPhotos; i++) {
-      const img = document.createElement('img');
-      img.src = `images/foto${i}.jpeg`;
-      img.alt = `Memori ${i}`;
-      // Delay antar foto 8 detik
-      img.style.animation = `showHide 8s forwards`;
-      img.style.animationDelay = `${(i - 1) * 8}s`;
-      container.appendChild(img);
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
     }
 
-    // Munculkan pesan akhir setelah semua foto selesai
-    setTimeout(() => {
-      document.getElementById('pesan-akhir').style.opacity = '1';
-      document.getElementById('pesan-akhir').style.transition = 'opacity 2s';
-    }, totalPhotos * 8000);
+    function bukaPesan() {
+      // Sembunyikan layar welcome
+      document.getElementById("welcome-screen").style.display = "none";
+      
+      // Munculkan kontainer utama
+      var main = document.getElementById("main-container");
+      main.style.display = "flex";
+      
+      // Tambahkan class untuk mulai animasi teks & foto
+      document.getElementById("content-box").classList.add("animate-now");
 
-    function playMusic() {
-      var audio = document.getElementById('mySong');
+      // Putar musik
+      var audio = document.getElementById("lagu");
       audio.play();
-      document.querySelector('.music-control').innerHTML = "🎵 Musik Aktif";
+
+      // Mulai hujan love merah
+      setInterval(createHeart, 300);
     }
-
-    // Klik di mana saja untuk putar musik (antisipasi kebijakan browser)
-    document.body.addEventListener('click', function() {
-      playMusic();
-    }, { once: true });
-
-    // Opsional: Tutup otomatis (Hati-hati: beberapa browser memblokir window.close jika tidak dibuka via JS)
-    setTimeout(function() {
-      console.log("Selesai");
-    }, (totalPhotos * 8 + 10) * 1000); 
   </script>
+
 </body>
 </html>
