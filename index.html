@@ -2,10 +2,15 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Memori Of Love </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Of Love ❤️</title>
+  
+  <!-- Logo Love Merah pada Tab Browser (Favicon) -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2107/2107845.png" type="image/png">
+
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
       margin: 0;
       padding: 20px;
@@ -13,153 +18,135 @@
       background-attachment: fixed;
       background-size: cover;
       color: #fff;
-      overflow: hidden; /* Mencegah scroll saat animasi */
+      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    /* Background anime */
-    body::before {
-      content: "";
+    /* Background Anime Overlay */
+    .bg-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       background: url("images/anime-love-bg.jpg") no-repeat center center;
       background-size: cover;
-      opacity: 0.4;
+      opacity: 0.3;
       z-index: -1;
     }
 
     h1, h2 {
-      text-shadow: 2px 2px 4px #c71585;
-      opacity: 0;
-    }
-
-    @keyframes fadeText {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeTextOut {
-      0% { opacity: 0; transform: translateY(20px); }
-      30% { opacity: 1; transform: translateY(0); }
-      70% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(20px); }
+      text-shadow: 2px 2px 8px rgba(199, 21, 133, 0.7);
     }
 
     .gallery {
       position: relative;
       width: 100%;
-      height: 500px;
-      margin-top: 50px;
+      height: 70vh;
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     img {
       position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      max-width: 90%;
+      max-width: 85%;
       max-height: 450px;
-      border: 5px solid #fff;
-      border-radius: 12px;
+      border: 8px solid #fff;
+      border-radius: 20px;
       opacity: 0;
-      animation: showHide 8s forwards;
-      box-shadow: 0 0 25px rgba(255, 105, 180, 0.9);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       object-fit: cover;
+      transition: transform 0.5s;
     }
 
+    /* Animasi Muncul Bergantian */
     @keyframes showHide {
-      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-      15% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-      85% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+      0% { opacity: 0; transform: scale(0.8) rotate(-2deg); }
+      10% { opacity: 1; transform: scale(1) rotate(0deg); }
+      90% { opacity: 1; transform: scale(1) rotate(0deg); }
+      100% { opacity: 0; transform: scale(1.1) rotate(2deg); }
     }
 
-    h1 {
-      animation: fadeText 3s forwards;
-      animation-delay: 0.5s;
+    .animate-photo {
+      animation: showHide 8s infinite;
     }
 
-    /* Foto bergantian - Path sudah diperbaiki ke folder images/ */
-    img:nth-child(1) { animation-delay: 4s; }
-    img:nth-child(2) { animation-delay: 12s; }
-    img:nth-child(3) { animation-delay: 20s; }
-    img:nth-child(4) { animation-delay: 28s; }
-    img:nth-child(5) { animation-delay: 36s; }
-    img:nth-child(6) { animation-delay: 44s; }
-    img:nth-child(7) { animation-delay: 52s; }
-    img:nth-child(8) { animation-delay: 60s; }
-    img:nth-child(9) { animation-delay: 68s; }
-    img:nth-child(10) { animation-delay: 76s; }
-    img:nth-child(11) { animation-delay: 84s; }
-    img:nth-child(12) { animation-delay: 92s; }
-    img:nth-child(13) { animation-delay: 100s; }
-    img:nth-child(14) { animation-delay: 108s; }
-    img:nth-child(15) { animation-delay: 116s; }
-    img:nth-child(16) { animation-delay: 124s; }
-    img:nth-child(17) { animation-delay: 132s; }
-
-    h2 {
-      animation: fadeTextOut 10s forwards;
-      animation-delay: 140s;
+    /* Pesan Teks */
+    #pesan-akhir {
+      opacity: 0;
+      margin-top: 20px;
+      font-size: 1.5rem;
+      padding: 0 20px;
     }
 
     .music-control {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: rgba(255, 255, 255, 0.3);
-      padding: 10px;
-      border-radius: 20px;
-      font-size: 12px;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 10px 15px;
+      border-radius: 30px;
+      font-size: 14px;
+      color: #c71585;
+      font-weight: bold;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
     }
   </style>
 </head>
 <body>
 
-  <h1>💖 Selamat wisuda sayang 💖</h1>
+  <div class="bg-overlay"></div>
 
-  <div class="gallery">
-    <!-- Path diperbaiki ke images/ karena foto ada di folder images -->
-    <img src="images/foto1.jpeg" alt="Foto 1">
-    <img src="images/foto2.jpeg" alt="Foto 2">
-    <img src="images/foto3.jpeg" alt="Foto 3">
-    <img src="images/foto4.jpeg" alt="Foto 4">
-    <img src="images/foto5.jpeg" alt="Foto 5">
-    <img src="images/foto6.jpeg" alt="Foto 6">
-    <img src="images/foto7.jpeg" alt="Foto 7">
-    <img src="images/foto8.jpeg" alt="Foto 8">
-    <img src="images/foto9.jpeg" alt="Foto 9">
-    <img src="images/foto10.jpeg" alt="Foto 10">
-    <img src="images/foto11.jpeg" alt="Foto 11">
-    <img src="images/foto12.jpeg" alt="Foto 12">
-    <img src="images/foto13.jpeg" alt="Foto 13">
-    <img src="images/foto14.jpeg" alt="Foto 14">
-    <img src="images/foto15.jpeg" alt="Foto 15">
-    <img src="images/foto16.jpeg" alt="Foto 16">
-    <img src="images/foto17.jpeg" alt="Foto 17">
+  <h1 id="title">💖 Selamat wisuda sayang 💖</h1>
+
+  <div class="gallery" id="photo-container">
+    <!-- Foto akan dimuat otomatis oleh JavaScript agar lebih rapi -->
   </div>
 
-  <h2>💖 Jangan berhenti mencintaiku dan jangan berubah sampai kapanpun 💖</h2>
+  <h2 id="pesan-akhir">💖 Jangan berhenti mencintaiku dan jangan berubah sampai kapanpun 💖</h2>
 
-  <!-- Musik Path diperbaiki -->
-  <audio id="mySong" autoplay loop>
+  <audio id="mySong" loop>
     <source src="musik/musik/TitiDj-JanganBerhentiMencintaiku.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
   </audio>
 
-  <div class="music-control">🎵 Musik Otomatis</div>
+  <div class="music-control" onclick="playMusic()">🎵 Klik untuk Musik</div>
 
   <script>
-    // Penjelasan: Browser modern melarang autoplay musik sebelum user klik sesuatu.
-    // Klik di mana saja pada layar untuk memastikan musik berputar.
+    const totalPhotos = 17;
+    const container = document.getElementById('photo-container');
+
+    // Generate elemen foto secara otomatis
+    for (let i = 1; i <= totalPhotos; i++) {
+      const img = document.createElement('img');
+      img.src = `images/foto${i}.jpeg`;
+      img.alt = `Memori ${i}`;
+      // Delay antar foto 8 detik
+      img.style.animation = `showHide 8s forwards`;
+      img.style.animationDelay = `${(i - 1) * 8}s`;
+      container.appendChild(img);
+    }
+
+    // Munculkan pesan akhir setelah semua foto selesai
+    setTimeout(() => {
+      document.getElementById('pesan-akhir').style.opacity = '1';
+      document.getElementById('pesan-akhir').style.transition = 'opacity 2s';
+    }, totalPhotos * 8000);
+
+    function playMusic() {
+      var audio = document.getElementById('mySong');
+      audio.play();
+      document.querySelector('.music-control').innerHTML = "🎵 Musik Aktif";
+    }
+
+    // Klik di mana saja untuk putar musik (antisipasi kebijakan browser)
     document.body.addEventListener('click', function() {
-        var audio = document.getElementById('mySong');
-        audio.play();
+      playMusic();
     }, { once: true });
 
-    // Close otomatis setelah 150 detik
+    // Opsional: Tutup otomatis (Hati-hati: beberapa browser memblokir window.close jika tidak dibuka via JS)
     setTimeout(function() {
-      window.close();
-    }, 150000); 
+      console.log("Selesai");
+    }, (totalPhotos * 8 + 10) * 1000); 
   </script>
 </body>
 </html>
