@@ -2,181 +2,164 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Graduation Sayang</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    /* LAYAR PEMBUKA (Agar musik bisa otomatis setelah klik) */
-    #overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-color: #ffb6c1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 100;
-      cursor: pointer;
-      flex-direction: column;
-      text-align: center;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
-
-    #overlay h2 { margin-bottom: 20px; font-size: 24px; }
-    
-    .btn-buka {
-      padding: 15px 30px;
-      background: white;
-      color: #ff69b4;
-      border-radius: 50px;
-      font-weight: bold;
-      border: none;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    /* BACKGROUND UTAMA */
     body {
-      background-image: url("anime-love-bg.jpg"); /* Memanggil file background kamu */
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       text-align: center;
-      overflow: hidden;
-      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #ffb6c1, #ff69b4, #ffc0cb);
+      background-attachment: fixed;
+      background-size: cover;
+      color: #fff;
+      overflow: hidden; /* Mencegah scroll saat animasi */
     }
 
-    /* Filter agar background tidak terlalu terang */
-    .bg-filter {
+    /* Background anime */
+    body::before {
+      content: "";
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(255, 255, 255, 0.3);
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url("images/anime-love-bg.jpg") no-repeat center center;
+      background-size: cover;
+      opacity: 0.4;
       z-index: -1;
     }
 
-    .content {
-      display: none; /* Sembunyi sampai tombol diklik */
-      padding-top: 50px;
+    h1, h2 {
+      text-shadow: 2px 2px 4px #c71585;
+      opacity: 0;
     }
 
-    h1 {
-      color: #d63384;
-      text-shadow: 2px 2px 5px white;
-      animation: fadeIn 2s ease-in;
+    @keyframes fadeText {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeTextOut {
+      0% { opacity: 0; transform: translateY(20px); }
+      30% { opacity: 1; transform: translateY(0); }
+      70% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(20px); }
     }
 
     .gallery {
       position: relative;
-      margin-top: 40px;
-      height: 450px;
+      width: 100%;
+      height: 500px;
+      margin-top: 50px;
     }
 
-    .gallery img {
+    img {
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%) scale(0.8);
-      max-width: 85%;
-      max-height: 400px;
-      border: 8px solid white;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      max-width: 90%;
+      max-height: 450px;
+      border: 5px solid #fff;
+      border-radius: 12px;
       opacity: 0;
-      animation: slideShow 8s forwards;
+      animation: showHide 8s forwards;
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.9);
+      object-fit: cover;
     }
 
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-    @keyframes slideShow {
-      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+    @keyframes showHide {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
       15% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
       85% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
     }
 
-    /* Delay Animasi Foto */
-    img:nth-child(1) { animation-delay: 1s; }
-    img:nth-child(2) { animation-delay: 9s; }
-    img:nth-child(3) { animation-delay: 17s; }
-    img:nth-child(4) { animation-delay: 25s; }
-    img:nth-child(5) { animation-delay: 33s; }
-    img:nth-child(6) { animation-delay: 41s; }
-    img:nth-child(7) { animation-delay: 49s; }
-    img:nth-child(8) { animation-delay: 57s; }
-    img:nth-child(9) { animation-delay: 65s; }
-    img:nth-child(10) { animation-delay: 73s; }
-    img:nth-child(11) { animation-delay: 81s; }
-    img:nth-child(12) { animation-delay: 89s; }
-    img:nth-child(13) { animation-delay: 97s; }
-    img:nth-child(14) { animation-delay: 105s; }
-    img:nth-child(15) { animation-delay: 113s; }
-    img:nth-child(16) { animation-delay: 121s; }
-    img:nth-child(17) { animation-delay: 129s; }
+    h1 {
+      animation: fadeText 3s forwards;
+      animation-delay: 0.5s;
+    }
 
-    h2.footer-text {
-      color: #d63384;
-      margin-top: 20px;
-      opacity: 0;
-      animation: fadeIn 3s forwards;
-      animation-delay: 137s;
+    /* Foto bergantian - Path sudah diperbaiki ke folder images/ */
+    img:nth-child(1) { animation-delay: 4s; }
+    img:nth-child(2) { animation-delay: 12s; }
+    img:nth-child(3) { animation-delay: 20s; }
+    img:nth-child(4) { animation-delay: 28s; }
+    img:nth-child(5) { animation-delay: 36s; }
+    img:nth-child(6) { animation-delay: 44s; }
+    img:nth-child(7) { animation-delay: 52s; }
+    img:nth-child(8) { animation-delay: 60s; }
+    img:nth-child(9) { animation-delay: 68s; }
+    img:nth-child(10) { animation-delay: 76s; }
+    img:nth-child(11) { animation-delay: 84s; }
+    img:nth-child(12) { animation-delay: 92s; }
+    img:nth-child(13) { animation-delay: 100s; }
+    img:nth-child(14) { animation-delay: 108s; }
+    img:nth-child(15) { animation-delay: 116s; }
+    img:nth-child(16) { animation-delay: 124s; }
+    img:nth-child(17) { animation-delay: 132s; }
+
+    h2 {
+      animation: fadeTextOut 10s forwards;
+      animation-delay: 140s;
+    }
+
+    .music-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.3);
+      padding: 10px;
+      border-radius: 20px;
+      font-size: 12px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Layar Pembuka -->
-  <div id="overlay" onclick="mulai()">
-    <h2>Klik untuk Buka Pesan ❤️</h2>
-    <button class="btn-buka">BUKA SEKARANG</button>
+  <h1>💖 Happy Graduation Sayang 💖</h1>
+
+  <div class="gallery">
+    <!-- Path diperbaiki ke images/ karena foto ada di folder images -->
+    <img src="images/foto1.jpeg" alt="Foto 1">
+    <img src="images/foto2.jpeg" alt="Foto 2">
+    <img src="images/foto3.jpeg" alt="Foto 3">
+    <img src="images/foto4.jpeg" alt="Foto 4">
+    <img src="images/foto5.jpeg" alt="Foto 5">
+    <img src="images/foto6.jpeg" alt="Foto 6">
+    <img src="images/foto7.jpeg" alt="Foto 7">
+    <img src="images/foto8.jpeg" alt="Foto 8">
+    <img src="images/foto9.jpeg" alt="Foto 9">
+    <img src="images/foto10.jpeg" alt="Foto 10">
+    <img src="images/foto11.jpeg" alt="Foto 11">
+    <img src="images/foto12.jpeg" alt="Foto 12">
+    <img src="images/foto13.jpeg" alt="Foto 13">
+    <img src="images/foto14.jpeg" alt="Foto 14">
+    <img src="images/foto15.jpeg" alt="Foto 15">
+    <img src="images/foto16.jpeg" alt="Foto 16">
+    <img src="images/foto17.jpeg" alt="Foto 17">
   </div>
 
-  <div class="bg-filter"></div>
+  <h2>💖 “Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.” 💖</h2>
 
-  <div class="content" id="mainContent">
-    <h1>💖 Happy Graduation Sayang 💖</h1>
-    
-    <div class="gallery">
-      <img src="foto1.jpeg" alt="1">
-      <img src="foto2.jpeg" alt="2">
-      <img src="foto3.jpeg" alt="3">
-      <img src="foto4.jpeg" alt="4">
-      <img src="foto5.jpeg" alt="5">
-      <img src="foto6.jpeg" alt="6">
-      <img src="foto7.jpeg" alt="7">
-      <img src="foto8.jpeg" alt="8">
-      <img src="foto9.jpeg" alt="9">
-      <img src="foto10.jpeg" alt="10">
-      <img src="foto11.jpeg" alt="11">
-      <img src="foto12.jpeg" alt="12">
-      <img src="foto13.jpeg" alt="13">
-      <img src="foto14.jpeg" alt="14">
-      <img src="foto15.jpeg" alt="15">
-      <img src="foto16.jpeg" alt="16">
-      <img src="foto17.jpeg" alt="17">
-    </div>
-
-    <h2 class="footer-text">💖 Jangan berhenti mencintaiku 💖</h2>
-  </div>
-
-  <!-- Musik -->
-  <audio id="myLagu" loop>
-    <source src="TitiDj-JanganBerhentiMencintaiku.mp3" type="audio/mpeg">
+  <!-- Musik Path diperbaiki -->
+  <audio id="mySong" autoplay loop>
+    <source src="musik/musik/TitiDj-JanganBerhentiMencintaiku.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
   </audio>
 
-  <script>
-    function mulai() {
-      // 1. Sembunyikan Overlay
-      document.getElementById("overlay").style.display = "none";
-      
-      // 2. Tampilkan Konten
-      document.getElementById("mainContent").style.display = "block";
-      
-      // 3. Putar Musik (Berhasil karena sudah ada klik)
-      var lagu = document.getElementById("myLagu");
-      lagu.play();
-    }
-  </script>
+  <div class="music-control">🎵 Musik Otomatis</div>
 
+  <script>
+    // Penjelasan: Browser modern melarang autoplay musik sebelum user klik sesuatu.
+    // Klik di mana saja pada layar untuk memastikan musik berputar.
+    document.body.addEventListener('click', function() {
+        var audio = document.getElementById('mySong');
+        audio.play();
+    }, { once: true });
+
+    // Close otomatis setelah 150 detik
+    setTimeout(function() {
+      window.close();
+    }, 150000); 
+  </script>
 </body>
 </html>
